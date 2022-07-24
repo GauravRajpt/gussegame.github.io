@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-size: 2rem;
+        }
+    div.container{
+        width: 80vw;
+        height:80vh;
+        border: 2px solid white;
+        padding-left: 10px;
+        background-color: black;
+        color: white;
+       
+    }
+    div.row1{
+        display: flex;
+        justify-content: center;
+    }
+    div.number{
+        border: 2px solid white;
+        margin-top:3rem;
+        width: 100px;
+        height:100px;
+        font-size: 5rem;
+    }
+    .gusse{
+        width: 100px;
+        height:100px;
+        font-size: 5rem;
+        
+    }
+
+    .btn{
+        height: 50px;
+        width: 60px;
+    }
+
+    div.row2{
+        display: flex;
+        justify-content: space-around   ;
+        align-items: flex-end;
+        height: 50vh;
+        
+    }
+</style>
+</head>
+<body> <div class="container">
+    <button class="btn again">Again</button>
+    <div class="row1">
+        <div class= number>  ?
+            </div>
+        </div>
+        <div class="row2">
+            <div class="left">
+                <input class="gusse" autofocus="" type="number" value="">
+                <p>Gusse the number from 0 to 20</p>
+                <button class="btn check" >Check</button>
+            </div>
+            <div class="right">
+                
+                <span class="result">result</span>
+                <p >Score: <span class="score"></span></p>
+                
+                <p >Highscore: <span class="highscore">0</span></p>
+                
+            </div>
+            
+        </div>
+        </div>
+        <script>'use strict';
+        let score=5;
+        const scores= function(score){
+            document.querySelector('.score').innerHTML= score;
+        }
+        scores(score);
+            const result= document.querySelector('.result');
+           // console.log(result)
+           let num= Math.round(Math.random()*20);
+           
+           
+           let highscore=0;
+           
+           const check= document.querySelector('.check');
+         
+
+
+           check.addEventListener('click', function(){
+            //problem
+            // i get the id form .gusse , before the click method so whenever i compare the value it says o;
+            //then i went to stackoverflow and found out the solution
+            //then i get the value inside check.addeventlistner
+
+            let gusse= +document.querySelector('.gusse').value;
+            //when there is  no input or in minus or greater than 20
+            if(!gusse ||gusse<0 || gusse>20){
+                // when i was using textcontent than <br> didn't work so i used innerHTML
+                result.innerHTML="type something <br/> between 0 to 20"
+            }
+            if (score> 0){
+                //when gusse is right
+             if(num===gusse){
+            
+            //console.log(gusse)
+            document.querySelector('.number').textContent= num;
+            result.textContent= 'you win';
+            document.querySelector('.container').style.backgroundColor= 'green';
+            result.style.fontSize='5rem'
+            check.disabled= true;
+            
+            if(highscore<score){
+                highscore= score;
+                document.querySelector('.highscore').innerHTML= highscore;
+            }
+
+           
+           }
+           if(gusse!= num&& gusse>=0){
+            result.innerHTML= gusse>num&& gusse<21? "too high": "too low";
+            score--;
+            scores(score);
+           }
+        //    else if(gusse>num&& gusse<21){
+          
+        //    }//when gusse is low
+        //    else if(gusse<num&& gusse>=0){
+        //     result.innerHTML= "too low"
+        //     score--;
+        //     scores(score);
+        //    }
+          
+        
+           }
+           else {
+            result.innerHTML="oops you lose </br> game"
+            score=0;
+            scores(score);
+           }
+        });
+        const again=document.querySelector('.again');
+        //when user clicks on again button
+        again.addEventListener('click' ,function(){
+
+            //use below line to reload the page
+            //document.location.reload();
+            result.innerHTML= "Result"
+            result.style.fontSize= "3rem"
+            check.disabled= false;
+            score=5;
+            scores(score);
+            
+            num= Math.round(Math.random()*10);
+           document.querySelector('.number').textContent= '?';
+           document.querySelector('.container').style.backgroundColor= "black";
+           
+           document.querySelector('.gusse').value= "";
+           
+           
+           
+            
+        })
+
+
+
+
+        </script>
+</body>
+</html>

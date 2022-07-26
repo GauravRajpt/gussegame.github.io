@@ -134,10 +134,17 @@ body {
 
             let gusse= +document.querySelector('.gusse').value;
             //when there is  no input or in minus or greater than 20
-            if(!gusse ||gusse<0 || gusse>20){
+            if( gusse>20 ||!gusse ||gusse<0 ){
                 // when i was using textcontent than <br> didn't work so i used innerHTML
                 result.innerHTML="type something <br/> between 0 to 20"
             }
+
+            else if(gusse!= num&& gusse>0 && gusse<21)
+            {
+            result.innerHTML= gusse>num&& gusse<21? "too high": "too low";
+            score--;
+            scores(score);
+           }
             if (score> 0){
                 //when gusse is right
              if(num===gusse){
@@ -156,11 +163,7 @@ body {
 
            
            }
-           if(gusse!= num&& gusse>=0){
-            result.innerHTML= gusse>num&& gusse<21? "too high": "too low";
-            score--;
-            scores(score);
-           }
+           
         //    else if(gusse>num&& gusse<21){
           
         //    }//when gusse is low
